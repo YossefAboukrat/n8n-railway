@@ -1,13 +1,14 @@
 FROM node:18-alpine
 
-ARG N8N_VERSION=1.56.1
+# Supprimez la version fixe de N8N
+# ARG N8N_VERSION=1.56.1
 
 RUN apk add --update graphicsmagick tzdata
 
 USER root
 
 RUN apk --update add --virtual build-dependencies python3 build-base && \
-    npm_config_user=root npm install --location=global n8n@${N8N_VERSION} && \
+    npm_config_user=root npm install --location=global n8n@latest && \
     apk del build-dependencies
 
 WORKDIR /data
